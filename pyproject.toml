@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "skypro-homework-web-basics"
+version = "0.1.0"
+description = ""
+authors = ["Kruck <reka_931@mail.ru>"]
+readme = "README.md"
+packages = [{include = "skypro_homework_web_basics"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
