@@ -1,6 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
-import webbrowser
 
 # Для начала определим настройки запуска
 hostName = "localhost"  # Адрес для доступа по сети
@@ -15,6 +14,7 @@ class MyServer(BaseHTTPRequestHandler):
 
     @staticmethod
     def __get_html_content():
+        """Метод для открытия файла HTML"""
         html_file = open('../SkyPro_homework_web_basics/contacts/contacts.html', 'r', encoding='utf-8')
         source_code = html_file.read()
         return source_code
@@ -22,6 +22,12 @@ class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
         query_components = parse_qs(urlparse(self.path).query)
+        name = query_components.get('firstName', [''])[0]
+        email = query_components.get('eMail', [''])[0]
+        message = query_components.get('message', [''])[0]
+        print(f"Имя: {name}")
+        print(f"Почта: {email}")
+        print(f"Сообщение: {message}")
         page_content = self.__get_html_content()
         self.send_response(200)  # Отправка кода ответа
         self.send_header("Content-type", "text/html")  # Отправка типа данных, который будет передаваться
